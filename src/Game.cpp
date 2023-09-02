@@ -48,6 +48,14 @@ void VNGin::Game::Run(int rate) {
         // Logic Update
 
         SDL_RenderPresent(renderer);
+
+        if(!isRunning) 
+            break; 
+
         SDL_Delay(1000/rate);
     }
+}
+
+void VNGin::Game::Stop() {
+    isRunning = false;
 }

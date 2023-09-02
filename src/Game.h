@@ -15,7 +15,7 @@ namespace VNGin {
             ColorRGBA backgroundColor = ColorRGBA::white); 
 
         void Run(int rate);
-        //void Stop(void);  
+        void Stop(void);  
     private: 
         SDL_Window* window;
         SDL_Renderer* renderer;
