@@ -1,0 +1,1 @@
+A framework built around SDL2 for easy game developement.
