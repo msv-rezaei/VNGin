@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include "Module.h"
+#include "Transform.h"
 
 #include <vector> 
 #include <string> 
@@ -11,7 +12,7 @@ namespace VNGin {
     class Entity {
         friend class Scene;
     public: 
-        Entity(Scene* scene = nullptr, std::string name = "New Entity");
+        Entity(Scene* scene = nullptr, std::string name = "New Entity", Vector position = Vector::zero, double rotation = 0.0, Vector scale = Vector::one);
         Entity(const Entity&) = delete;
         Entity(Entity&&) = delete;
         ~Entity(void);
@@ -20,7 +21,7 @@ namespace VNGin {
         T* GetModule() {
             T* target;
             for(auto& m : modules) {
-                if((target == dynamic_cast<T*>(m)) != nullptr) 
+                if((target = dynamic_cast<T*>(m)) != nullptr) 
                     return target;
             }
 
@@ -34,7 +35,11 @@ namespace VNGin {
                 modules.push_back(newModule);
                 return newModule;
             }
+
+            return nullptr;
         }
+
+        Transform* transform;
     private: 
         void UpdateModules(void);
 

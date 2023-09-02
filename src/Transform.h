@@ -2,10 +2,10 @@
 #define TRANSFORM_H
 
 #include "Module.h"
-#include "Entity.h"
 #include "Vector.h"
 
 namespace VNGin {
+    class Entity;
     class Transform : public Module {
     public: 
         Transform(Entity* owner = nullptr, Vector position = Vector::zero, double rotation = 0.0, Vector scale = Vector::one) 
@@ -26,6 +26,7 @@ namespace VNGin {
 
         const char* GetType() { return "Transform"; }
     private: 
+        void Start() {} 
         void Update() {} 
 
         Vector position;
