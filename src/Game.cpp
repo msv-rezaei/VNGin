@@ -38,3 +38,16 @@ VNGin::Game::Game(std::string title, bool fullScreen, int screenWidth, int scree
         this->screenHeight = screenHeight;
     }
 }
+
+void VNGin::Game::Run(int rate) {
+    isRunning = true; 
+    while(true) {
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); 
+        SDL_RenderClear(renderer);
+
+        // Logic Update
+
+        SDL_RenderPresent(renderer);
+        SDL_Delay(1000/rate);
+    }
+}
