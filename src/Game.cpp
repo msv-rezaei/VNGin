@@ -37,6 +37,8 @@ VNGin::Game::Game(std::string title, bool fullScreen, int screenWidth, int scree
         this->screenWidth = screenWidth;
         this->screenHeight = screenHeight;
     }
+
+    activeScene = new Scene();
 }
 
 void VNGin::Game::Run(int rate) {
@@ -45,7 +47,7 @@ void VNGin::Game::Run(int rate) {
         SDL_SetRenderDrawColor(renderer, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a); 
         SDL_RenderClear(renderer);
 
-        // Logic Update
+        activeScene->Update();
 
         SDL_RenderPresent(renderer);
 

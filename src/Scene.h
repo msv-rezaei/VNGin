@@ -7,6 +7,7 @@
 
 namespace VNGin {
     class Scene {
+        friend class Game;
     public:
         Scene(void);
         Scene(const Scene&) = delete;
@@ -15,6 +16,7 @@ namespace VNGin {
         void AddEntity(Entity* entity);
         void RemoveEntity(Entity* entity);
     private: 
+        void Update(void);
         std::vector<Entity*> entities;
     };
 }

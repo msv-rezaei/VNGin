@@ -16,3 +16,8 @@ void VNGin::Scene::RemoveEntity(Entity* entity) {
     if(iter != entities.end()) 
         entities.erase(iter); 
 }
+
+void VNGin::Scene::Update() {
+    for(int i = 0; i < entities.size(); i++) 
+        entities[i]->UpdateModules();
+}

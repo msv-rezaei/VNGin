@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "Utility.h"
+#include "Scene.h"
 
 #include <SDL2/SDL.h> 
 #include <SDL2/SDL_image.h> 
@@ -25,6 +26,7 @@ namespace VNGin {
         ColorRGBA backgroundColor;
 
         bool isRunning; 
+        Scene* activeScene;
     };
 }
 

@@ -7,8 +7,8 @@
 #include <string> 
 
 namespace VNGin {
-    class Scene;
     class Entity {
+        friend class Scene;
     public: 
         Entity(Scene* scene = nullptr, std::string name = "New Entity");
         Entity(const Entity&) = delete;
