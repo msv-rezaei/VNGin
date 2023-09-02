@@ -2,7 +2,7 @@
 /Makefile
 
 # VSCode
-/.vscode/settings.json
+/.vscode
 
 # Prerequisites
 *.d
