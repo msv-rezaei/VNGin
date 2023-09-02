@@ -1,6 +1,9 @@
 #include "Entity.h"
+#include "Scene.h"
 
-VNGin::Entity::Entity(Scene* scene, std::string name) : scene{scene}, name{name} {}
+VNGin::Entity::Entity(Scene* scene, std::string name) : scene{scene}, name{name} {
+    scene->AddEntity(this);
+}
 
 VNGin::Entity::~Entity() {} 
 
