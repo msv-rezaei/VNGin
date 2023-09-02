@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-VNGin::Game::Game(std::string title, bool fullScreen, int screenWidth, int screenHeight) {
+VNGin::Game::Game(std::string title, bool fullScreen, int screenWidth, int screenHeight, ColorRGBA backgroundColor) {
     int windowFlags = fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0;
     int rendererFlags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
 
@@ -42,7 +42,7 @@ VNGin::Game::Game(std::string title, bool fullScreen, int screenWidth, int scree
 void VNGin::Game::Run(int rate) {
     isRunning = true; 
     while(true) {
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); 
+        SDL_SetRenderDrawColor(renderer, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a); 
         SDL_RenderClear(renderer);
 
         // Logic Update
