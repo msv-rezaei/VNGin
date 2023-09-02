@@ -2,6 +2,7 @@
 #define MODULE_H
 
 namespace VNGin {
+    class Entity;
     class Module {
         friend class Entity;
     public: 

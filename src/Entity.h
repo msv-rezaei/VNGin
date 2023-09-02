@@ -7,6 +7,7 @@
 #include <string> 
 
 namespace VNGin {
+    class Scene;
     class Entity {
         friend class Scene;
     public: 
@@ -29,7 +30,7 @@ namespace VNGin {
         template<typename T, typename ...Args> 
         T* AddModule(Args... args) {
             if(GetModule<T>() == nullptr) {
-                T* newModule = new T(this, ...args);
+                T* newModule = new T(this, args...);
                 modules.push_back(newModule);
                 return newModule;
             }

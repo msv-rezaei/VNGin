@@ -6,6 +6,7 @@
 #include <vector> 
 
 namespace VNGin {
+    class Game;
     class Scene {
         friend class Game;
     public:
