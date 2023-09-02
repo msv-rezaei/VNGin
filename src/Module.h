@@ -3,7 +3,7 @@
 
 namespace VNGin {
     class Module {
-        class Entity;
+        friend class Entity;
     public: 
         virtual const char* GetType(void) = 0;
     protected: 
