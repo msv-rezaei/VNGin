@@ -39,6 +39,15 @@ namespace VNGin {
             return nullptr;
         }
 
+        template<typename T> 
+        void RemoveModule() {
+            auto target = GetModule<T>(); 
+            if(target != nullptr) {
+                modules.erase(target);
+                delete target;
+            }
+        }
+
         Transform* transform;
     private: 
         void UpdateModules(void);
