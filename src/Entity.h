@@ -15,7 +15,7 @@ namespace VNGin {
         Entity(Scene* scene = nullptr, std::string name = "New Entity", Vector position = Vector::zero, double rotation = 0.0, Vector scale = Vector::one);
         Entity(const Entity&) = delete;
         Entity(Entity&&) = delete;
-        ~Entity(void);
+        ~Entity();
 
         template<typename T> 
         T* GetModule() {

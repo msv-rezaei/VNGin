@@ -13,6 +13,7 @@ namespace VNGin {
         Scene(void);
         Scene(const Scene&) = delete;
         Scene(Scene&&) = delete;
+        ~Scene();
 
         void AddEntity(Entity* entity);
         void RemoveEntity(Entity* entity);

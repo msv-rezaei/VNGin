@@ -4,6 +4,11 @@
 
 VNGin::Scene::Scene() {} 
 
+VNGin::Scene::~Scene() {
+    for(int i = 0; i < entities.size(); i++) 
+        delete entities[i];
+}
+
 void VNGin::Scene::AddEntity(Entity* entity) {
     if(entity != nullptr) {
         if(std::find(entities.begin(), entities.end(), entity) == entities.end()) 
