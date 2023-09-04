@@ -1,4 +1,5 @@
 #include "Game.h" 
+#include "InputSystem.h"
 
 #include <stdexcept>
 
@@ -47,6 +48,7 @@ void VNGin::Game::Run(int rate) {
         SDL_SetRenderDrawColor(renderer, backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a); 
         SDL_RenderClear(renderer);
 
+        InputSystem::Update();  
         activeScene->Update();
 
         SDL_RenderPresent(renderer);
