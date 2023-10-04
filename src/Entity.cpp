@@ -16,3 +16,6 @@ void VNGin::Entity::UpdateModules() {
     for(int i = 0; i < modules.size(); i++) 
         modules[i]->Update();
 }
+
+template<>
+void VNGin::Entity::RemoveModule<VNGin::Transform>() { SDL_Log("Can't remove Transform component"); }

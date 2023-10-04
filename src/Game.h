@@ -17,6 +17,8 @@ namespace VNGin {
 
         void Run(int rate);
         void Stop(void);  
+
+        Scene* GetActiveScene(void) { return activeScene; }
     private: 
         SDL_Window* window;
         SDL_Renderer* renderer;
