@@ -18,7 +18,9 @@ namespace VNGin {
         void Run(int rate);
         void Stop(void);  
 
-        Scene* GetActiveScene(void) { return activeScene; }
+        Scene* GetActiveScene() { return activeScene; }
+
+        SDL_Texture* LoadTexture(const char* path);
     private: 
         SDL_Window* window;
         SDL_Renderer* renderer;

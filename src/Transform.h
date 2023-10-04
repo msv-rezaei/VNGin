@@ -8,7 +8,7 @@ namespace VNGin {
     class Entity;
     class Transform : public Module {
     public: 
-        Transform(Entity* owner = nullptr, Vector position = Vector::zero, double rotation = 0.0, Vector scale = Vector::one) 
+        Transform(Entity* owner, Vector position = Vector::zero, double rotation = 0.0, Vector scale = Vector::one) 
             : Module(owner), position{position}, rotation{rotation}, scale{scale} {} 
 
         void Move(Vector amount); 

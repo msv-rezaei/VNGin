@@ -52,6 +52,7 @@ namespace VNGin {
             }
         }
 
+        Scene* GetScene() { return scene; }
         void SwitchScene(Scene* newScene);
 
         Transform* transform;

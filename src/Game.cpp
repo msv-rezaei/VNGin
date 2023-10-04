@@ -49,7 +49,7 @@ void VNGin::Game::Run(int rate) {
         SDL_RenderClear(renderer);
 
         InputSystem::Update();  
-        activeScene->Update();
+        activeScene->Update(renderer);
 
         SDL_RenderPresent(renderer);
 
@@ -62,4 +62,8 @@ void VNGin::Game::Run(int rate) {
 
 void VNGin::Game::Stop() {
     isRunning = false;
+}
+
+SDL_Texture* VNGin::Game::LoadTexture(const char* path) {
+    return IMG_LoadTexture(renderer, path); 
 }
