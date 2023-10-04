@@ -15,7 +15,7 @@ namespace VNGin {
     class Entity {
         friend class Scene;
     public: 
-        Entity(Scene* scene = nullptr, std::string name = "New Entity", Vector position = Vector::zero, double rotation = 0.0, Vector scale = Vector::one);
+        Entity(Scene* scene, std::string name = "New Entity", Vector position = Vector::zero, double rotation = 0.0, Vector scale = Vector::one);
         Entity(const Entity&) = delete;
         Entity(Entity&&) = delete;
         ~Entity();
@@ -51,6 +51,8 @@ namespace VNGin {
                 delete target;
             }
         }
+
+        void SwitchScene(Scene* newScene);
 
         Transform* transform;
     private: 

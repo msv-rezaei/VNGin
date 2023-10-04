@@ -17,5 +17,11 @@ void VNGin::Entity::UpdateModules() {
         modules[i]->Update();
 }
 
+void VNGin::Entity::SwitchScene(Scene* newScene) {
+    scene->RemoveEntity(this);
+    newScene->AddEntity(this);
+    scene = newScene;
+}
+
 template<>
 void VNGin::Entity::RemoveModule<VNGin::Transform>() { SDL_Log("Can't remove Transform component"); }
