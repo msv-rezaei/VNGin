@@ -6,15 +6,15 @@ VNGin::Entity::Entity(Scene* scene, std::string name, Vector position, double ro
     scene->AddEntity(this);
 }
 
-VNGin::Entity::~Entity() {
-    scene->RemoveEntity(this);
-    for(int i = 0; i < modules.size(); i++) 
-        delete modules[i]; 
-} 
-
 void VNGin::Entity::UpdateModules() {
     for(int i = 0; i < modules.size(); i++) 
         modules[i]->Update();
+}
+
+void VNGin::Entity::Destroy() {
+    for(int i = modules.size()-1; i >= 0; i--) 
+        modules[i]->Destroy();
+    scene->RemoveEntity(this);
 }
 
 void VNGin::Entity::SwitchScene(Scene* newScene) {

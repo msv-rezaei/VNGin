@@ -12,25 +12,29 @@
 namespace VNGin {
     class Game {
     public: 
-        Game(std::string title = "New Game", bool fullScreen = true, int screenWidth = 1920, int screenHeight = 1080, 
+        static void New(std::string title = "New Game", bool fullScreen = true, int screenWidth = 1920, int screenHeight = 1080, 
             ColorRGBA backgroundColor = ColorRGBA::white); 
 
-        void Run(int rate);
-        void Stop(void);  
+        static void Run(int rate);
+        static void Stop(void);  
 
-        Scene* GetActiveScene() { return activeScene; }
+        static int ScreenWidth() { return screenWidth; }
+        static int ScreenHeight() { return screenHeight; }
+        static ColorRGBA BackgroundColor() { return backgroundColor; } 
+        static bool IsRunning() { return isRunning; }
+        static Scene* GetActiveScene() { return activeScene; }
 
-        SDL_Texture* LoadTexture(const char* path);
+        static SDL_Texture* LoadTexture(const char* path);
     private: 
-        SDL_Window* window;
-        SDL_Renderer* renderer;
+        static SDL_Window* window;
+        static SDL_Renderer* renderer;
 
-        int screenWidth;
-        int screenHeight;
-        ColorRGBA backgroundColor;
+        static int screenWidth;
+        static int screenHeight;
+        static ColorRGBA backgroundColor;
 
-        bool isRunning; 
-        Scene* activeScene;
+        static bool isRunning; 
+        static Scene* activeScene;
     };
 }
 

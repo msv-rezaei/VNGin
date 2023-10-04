@@ -41,13 +41,13 @@ void VNGin::Scene::RemoveFromRenderingMatrix(TextureRenderer* renderer) {
 }
 
 void VNGin::Scene::Update(SDL_Renderer* renderer) {   
-    for(auto entity : entities) 
-        entity->UpdateModules();
-    
     for(int i = 0; i < renderingMatrix.size(); i++) {
         for(int j = 0; j < renderingMatrix[i].size(); j++) {
             if(renderingMatrix[i][j]->isVisible) 
                 renderingMatrix[i][j]->Render(renderer);
         }
     }
+
+    for(auto entity : entities) 
+        entity->UpdateModules();
 }

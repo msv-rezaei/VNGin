@@ -14,7 +14,6 @@ namespace VNGin {
         TextureRenderer(Entity* owner, SDL_Texture* texture, int sortingOrder = 0, Vector pivot = pivotCenter);
         TextureRenderer(const TextureRenderer&) = delete;
         TextureRenderer(TextureRenderer&&) = delete;
-        ~TextureRenderer(void);
 
         int GetSortingOrder() { return sortingOrder; } 
         void SetSortingOrder(int sortingOrder);
@@ -22,6 +21,7 @@ namespace VNGin {
 
         void Show() { isVisible = true; }
         void Hide() { isVisible = false; }
+
 
         const char* GetType() { return "TextureRenderer"; }
 
@@ -40,6 +40,7 @@ namespace VNGin {
 
         void Start() {} 
         void Update() {} 
+        void Destroy(void);
 
         bool isVisible;
         SDL_Texture* texture;

@@ -3,7 +3,21 @@
 
 #include <stdexcept>
 
-VNGin::Game::Game(std::string title, bool fullScreen, int screenWidth, int screenHeight, ColorRGBA backgroundColor) {
+SDL_Window* VNGin::Game::window; 
+SDL_Renderer* VNGin::Game::renderer; 
+
+int VNGin::Game::screenWidth; 
+int VNGin::Game::screenHeight;
+VNGin::ColorRGBA VNGin::Game::backgroundColor; 
+
+bool VNGin::Game::isRunning; 
+VNGin::Scene* VNGin::Game::activeScene;
+
+void VNGin::Game::New(std::string title, bool fullScreen, int screenWidth, int screenHeight, ColorRGBA backgroundColor) {
+    Game::screenWidth = screenWidth; 
+    Game::screenHeight = screenHeight;
+    Game::backgroundColor = backgroundColor;
+
     int windowFlags = fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0;
     int rendererFlags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
 
@@ -18,7 +32,7 @@ VNGin::Game::Game(std::string title, bool fullScreen, int screenWidth, int scree
         throw new std::runtime_error(msg); 
     }
 
-    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, windowFlags);
+    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Game::screenWidth, Game::screenHeight, windowFlags);
     if(!window) {
         std::string msg = "SDL failed to create window. SDL_Error: "; 
         msg += SDL_GetError(); 
@@ -33,12 +47,8 @@ VNGin::Game::Game(std::string title, bool fullScreen, int screenWidth, int scree
     }
 
     if(fullScreen) 
-        SDL_GetRendererOutputSize(renderer, &this->screenWidth, &this->screenHeight); 
-    else {
-        this->screenWidth = screenWidth;
-        this->screenHeight = screenHeight;
-    }
-
+        SDL_GetRendererOutputSize(renderer, &Game::screenWidth, &Game::screenHeight); 
+        
     activeScene = new Scene();
 }
 

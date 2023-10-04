@@ -9,10 +9,6 @@ VNGin::TextureRenderer::TextureRenderer(Entity* owner, SDL_Texture* texture, int
     owner->GetScene()->AddToRenderingMatrix(this);
 }
 
-VNGin::TextureRenderer::~TextureRenderer() {
-    SDL_DestroyTexture(texture);
-}
-
 void VNGin::TextureRenderer::SetSortingOrder(int sortingOrder) {
     ValidateSortingOrder(sortingOrder);
 
@@ -49,6 +45,12 @@ void VNGin::TextureRenderer::Render(SDL_Renderer* renderer) {
     dest.y = owner->transform->GetPosition().y - (pivot.y * dest.h);
 
     SDL_RenderCopyEx(renderer, texture, NULL, &dest, owner->transform->GetRotation(), NULL, flip);
+}
+
+void VNGin::TextureRenderer::Destroy() {
+    owner->GetScene()->RemoveFromRenderingMatrix(this);
+    owner->RemoveModule<TextureRenderer>();
+    SDL_DestroyTexture(texture);
 }
 
 const VNGin::Vector VNGin::TextureRenderer::pivotUpLeft    = {0, 0};

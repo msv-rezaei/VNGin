@@ -28,6 +28,7 @@ namespace VNGin {
     private: 
         void Start() {} 
         void Update() {} 
+        void Destroy() {} 
 
         Vector position;
         double rotation;
