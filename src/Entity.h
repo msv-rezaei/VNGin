@@ -1,14 +1,13 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "SDL2/SDL.h"
-
 #include "Module.h"
 #include "Transform.h"
 
 #include <vector> 
 #include <string> 
 #include <algorithm>
+#include <SDL2/SDL.h>
 
 namespace VNGin {
     class Scene;
@@ -47,14 +46,14 @@ namespace VNGin {
             if(target != nullptr) {
                 auto iter = std::find(modules.begin(), modules.end(), target);
                 modules.erase(iter);
-                delete target;
+                target->Destroy();
             }
         }
 
-        void Destroy(void);
-
-        Scene* GetScene() { return scene; }
         void SwitchScene(Scene* newScene);
+        Scene* GetScene() { return scene; }
+
+        void Destroy(void);
 
         Transform* transform;
     private: 

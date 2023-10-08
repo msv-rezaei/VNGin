@@ -7,6 +7,7 @@
 namespace VNGin {
     class Entity;
     class Transform : public Module {
+        friend class Entity;
     public: 
         Transform(Entity* owner, Vector position = Vector::zero, double rotation = 0.0, Vector scale = Vector::one) 
             : Module(owner), position{position}, rotation{rotation}, scale{scale} {} 

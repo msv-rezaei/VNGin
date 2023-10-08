@@ -10,6 +10,7 @@ namespace VNGin {
     class TextureRenderer : public Module {
         friend class Game; 
         friend class Scene; 
+        friend class Entity;
     public: 
         TextureRenderer(Entity* owner, SDL_Texture* texture, int sortingOrder = 0, Vector pivot = pivotCenter);
         TextureRenderer(const TextureRenderer&) = delete;
