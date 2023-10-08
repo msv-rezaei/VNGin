@@ -4,7 +4,8 @@
 #include "Entity.h"
 #include "TextureRenderer.h"
 
-#include <vector> 
+#include <vector>
+#include <forward_list>  
 
 namespace VNGin {
     class Game;
@@ -13,7 +14,7 @@ namespace VNGin {
         friend class TextureRenderer;
     public:
         Scene() {
-            renderingMatrix = std::vector<std::vector<TextureRenderer*>>(10);
+            renderingMatrix = std::vector<std::forward_list<TextureRenderer*>>(10);
         }
 
         Scene(const Scene&) = delete;
@@ -28,7 +29,7 @@ namespace VNGin {
 
         void Update(SDL_Renderer* renderer);
         std::vector<Entity*> entities;
-        std::vector<std::vector<TextureRenderer*>> renderingMatrix;
+        std::vector<std::forward_list<TextureRenderer*>> renderingMatrix;
     };
 }
 
