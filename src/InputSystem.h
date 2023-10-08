@@ -13,8 +13,8 @@ namespace VNGin {
         static int GetKey(SDL_Scancode code);
     private: 
         static void Update(void);
-        static void UpdateMap(SDL_KeyboardEvent* event, int value);
-        static std::map<SDL_Scancode, int> keyMap;
+        static void UpdateMap(SDL_KeyboardEvent* event, bool value);
+        static std::map<SDL_Scancode, bool> keyMap;
     };
 }
 
