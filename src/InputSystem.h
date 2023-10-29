@@ -18,16 +18,15 @@ namespace VNGin {
     class InputSystem {
         friend class Game; 
     public: 
-        static int GetKey(SDL_Scancode code);
-        static int GetKeyDown(SDL_Scancode code);
-
-        static void AddCallback(SDL_Scancode code, void(*callback)(bool)); 
-        static void RemoveCallback(SDL_Scancode code, void(*callback)(bool));
+        static bool GetKey(SDL_Scancode code);
+        static bool GetKeyDown(SDL_Scancode code);
+        static bool GetKeyUp(SDL_Scancode code);
     private: 
+        static std::map<SDL_Scancode, KeyState>::iterator FindOrAddKey(SDL_Scancode code);
+
         static void Update(void);
         static void UpdateMap(SDL_Scancode event, bool value);
         static std::map<SDL_Scancode, KeyState> keyMap;
-        static std::map<SDL_Scancode, std::vector<void(*)(bool)>> callbackMap;
     };
 }
 

@@ -4,45 +4,30 @@
 #include <algorithm>
 
 std::map<SDL_Scancode, VNGin::KeyState> VNGin::InputSystem::keyMap;
-std::map<SDL_Scancode, std::vector<void(*)(bool)>> VNGin::InputSystem::callbackMap;
 
-int VNGin::InputSystem::GetKey(SDL_Scancode code) {
-    auto iter = keyMap.find(code);
-    if(iter == keyMap.end()) {
-        iter = keyMap.insert({code, {false, false}}).first; 
-        Update(); 
-    }
-
+bool VNGin::InputSystem::GetKey(SDL_Scancode code) {
+    auto iter = FindOrAddKey(code);
     return iter->second.currentState;
 }
 
-int VNGin::InputSystem::GetKeyDown(SDL_Scancode code) {
+bool VNGin::InputSystem::GetKeyDown(SDL_Scancode code) {
+    auto iter = FindOrAddKey(code);
+    return iter->second.lastState == false && iter->second.currentState == true;
+}
+
+bool VNGin::InputSystem::GetKeyUp(SDL_Scancode code) {
+    auto iter = FindOrAddKey(code);
+    return iter->second.lastState == true && iter->second.currentState == false;
+}
+
+std::map<SDL_Scancode, VNGin::KeyState>::iterator VNGin::InputSystem::FindOrAddKey(SDL_Scancode code) {
     auto iter = keyMap.find(code);
     if(iter == keyMap.end()) {
         iter = keyMap.insert({code, {false, false}}).first; 
         Update(); 
     }
-    
-    return iter->second.lastState == false && iter->second.currentState == true;
-}
 
-void VNGin::InputSystem::AddCallback(SDL_Scancode code, void(*callback)(bool)) {
-    auto iter = callbackMap.find(code); 
-    if(iter != callbackMap.end()) {
-        iter->second.push_back(callback);
-        return; 
-    }
-
-    callbackMap.insert({code, {callback}});
-}
-
-void VNGin::InputSystem::RemoveCallback(SDL_Scancode code, void(*callback)(bool)) {
-    auto iter = callbackMap.find(code); 
-    if(iter != callbackMap.end()) {
-        auto vecIter = std::find(iter->second.begin(), iter->second.end(), callback);
-        if(vecIter != iter->second.end()) 
-            iter->second.erase(vecIter);
-    }
+    return iter;
 }
 
 void VNGin::InputSystem::UpdateMap(SDL_Scancode code, bool value) {
@@ -66,11 +51,9 @@ void VNGin::InputSystem::Update() {
             exit(0); 
             break;
         case SDL_KEYDOWN: 
-            for(auto callback : callbackMap[event.key.keysym.scancode]) callback(true);
             UpdateMap(event.key.keysym.scancode, true); 
             break; 
         case SDL_KEYUP: 
-            for(auto callback : callbackMap[event.key.keysym.scancode]) callback(false);
             UpdateMap(event.key.keysym.scancode, false); 
             break; 
         default: 
