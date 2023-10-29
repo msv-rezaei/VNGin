@@ -46,11 +46,6 @@ void VNGin::Scene::Update(SDL_Renderer* renderer) {
         }
     }
 
-    SDL_Log("-----");
-    for(auto entity : entities) 
-        if(entity != nullptr) 
-            SDL_Log("%s\n", entity->name.c_str());
-
     for(auto entity : entities) 
         if(entity != nullptr)
             entity->UpdateModules();
