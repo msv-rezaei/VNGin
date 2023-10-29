@@ -1,18 +1,29 @@
 #include "InputSystem.h"
 
+#include <stdexcept>
 #include <algorithm>
 
-std::map<SDL_Scancode, bool> VNGin::InputSystem::keyMap;
+std::map<SDL_Scancode, VNGin::KeyState> VNGin::InputSystem::keyMap;
 std::map<SDL_Scancode, std::vector<void(*)(bool)>> VNGin::InputSystem::callbackMap;
 
 int VNGin::InputSystem::GetKey(SDL_Scancode code) {
     auto iter = keyMap.find(code);
     if(iter == keyMap.end()) {
-        iter = keyMap.insert({code, false}).first; 
+        iter = keyMap.insert({code, {false, false}}).first; 
         Update(); 
     }
 
-    return iter->second;
+    return iter->second.currentState;
+}
+
+int VNGin::InputSystem::GetKeyDown(SDL_Scancode code) {
+    auto iter = keyMap.find(code);
+    if(iter == keyMap.end()) {
+        iter = keyMap.insert({code, {false, false}}).first; 
+        Update(); 
+    }
+    
+    return iter->second.lastState == false && iter->second.currentState == true;
 }
 
 void VNGin::InputSystem::AddCallback(SDL_Scancode code, void(*callback)(bool)) {
@@ -34,17 +45,20 @@ void VNGin::InputSystem::RemoveCallback(SDL_Scancode code, void(*callback)(bool)
     }
 }
 
-void VNGin::InputSystem::UpdateMap(SDL_KeyboardEvent* event, bool value) {
-    if(!event->repeat) {
-        for(auto& key : keyMap) {
-            if(event->keysym.scancode == key.first) 
-                key.second = value;
-        }
+void VNGin::InputSystem::UpdateMap(SDL_Scancode code, bool value) {
+    try {
+        keyMap.at(code).lastState = keyMap.at(code).currentState;
+        keyMap.at(code).currentState = value;
     }
+    catch(std::out_of_range e) { return; }
 }
 
 void VNGin::InputSystem::Update() {
     SDL_Event event; 
+
+    for(auto &key : keyMap) {
+        key.second.lastState = key.second.currentState;
+    }
 
     while(SDL_PollEvent(&event)) {
         switch(event.type) {
@@ -53,11 +67,11 @@ void VNGin::InputSystem::Update() {
             break;
         case SDL_KEYDOWN: 
             for(auto callback : callbackMap[event.key.keysym.scancode]) callback(true);
-            UpdateMap(&event.key, true); 
+            UpdateMap(event.key.keysym.scancode, true); 
             break; 
         case SDL_KEYUP: 
             for(auto callback : callbackMap[event.key.keysym.scancode]) callback(false);
-            UpdateMap(&event.key, false); 
+            UpdateMap(event.key.keysym.scancode, false); 
             break; 
         default: 
             break;
