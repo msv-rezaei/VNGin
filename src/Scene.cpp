@@ -3,8 +3,8 @@
 #include <algorithm>
 
 VNGin::Scene::~Scene() {
-    for(int i = 0; i < entities.size(); i++) 
-        delete entities[i];
+    for(auto iter = entities.begin(); iter != entities.end(); iter++) 
+        (*iter)->Destroy();
 }
 
 void VNGin::Scene::AddEntity(Entity* entity) {
@@ -17,7 +17,7 @@ void VNGin::Scene::AddEntity(Entity* entity) {
 void VNGin::Scene::RemoveEntity(Entity* entity) {
     auto iter = std::find(entities.begin(), entities.end(), entity); 
     if(iter != entities.end()) 
-        entities.erase(iter); 
+        *iter = nullptr;
 }
 
 void VNGin::Scene::AddToRenderingMatrix(TextureRenderer* renderer) {
@@ -40,11 +40,23 @@ void VNGin::Scene::RemoveFromRenderingMatrix(TextureRenderer* renderer) {
 void VNGin::Scene::Update(SDL_Renderer* renderer) {   
     for(int i = 0; i < renderingMatrix.size(); i++) {
         for(auto iter = renderingMatrix[i].begin(); iter != renderingMatrix[i].end(); iter++) {
-            if((*iter)->isVisible) 
-                (*iter)->Render(renderer);
+            if(*iter != nullptr)
+                if((*iter)->isVisible) 
+                    (*iter)->Render(renderer);
         }
     }
 
+    SDL_Log("-----");
     for(auto entity : entities) 
-        entity->UpdateModules();
+        if(entity != nullptr) 
+            SDL_Log("%s\n", entity->name.c_str());
+
+    for(auto entity : entities) 
+        if(entity != nullptr)
+            entity->UpdateModules();
+
+    // Cleanup
+    auto iter = std::remove_if(entities.begin(), entities.end(), [](auto e){ return e == nullptr; });
+    while(iter != entities.end()) 
+        entities.erase(iter++);
 }

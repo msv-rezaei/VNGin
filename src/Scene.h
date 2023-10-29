@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "TextureRenderer.h"
 
-#include <vector>
+#include <list>
 #include <forward_list>  
 
 namespace VNGin {
@@ -28,7 +28,7 @@ namespace VNGin {
         void RemoveFromRenderingMatrix(TextureRenderer* renderer);
 
         void Update(SDL_Renderer* renderer);
-        std::vector<Entity*> entities;
+        std::list<Entity*> entities;
         std::vector<std::forward_list<TextureRenderer*>> renderingMatrix;
     };
 }
