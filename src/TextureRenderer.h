@@ -12,11 +12,12 @@ namespace VNGin {
         friend class Scene; 
         friend class Entity;
     public: 
-        TextureRenderer(Entity* owner, SDL_Texture* texture, int sortingOrder = 0, Vector pivot = pivotCenter);
+        TextureRenderer(Entity* owner, SDL_Texture* texture, int sortingOrder = 0, Vector pivot = Vector::pivotCenter);
         TextureRenderer(const TextureRenderer&) = delete;
         TextureRenderer(TextureRenderer&&) = delete;
 
         int GetSortingOrder() { return sortingOrder; } 
+        Vector GetTextureSize(void); 
         void SetSortingOrder(int sortingOrder);
         void SetFlip(bool flipX, bool flipY);
 
@@ -25,16 +26,6 @@ namespace VNGin {
 
 
         const char* GetType() { return "TextureRenderer"; }
-
-        const static Vector pivotUpLeft;    
-        const static Vector pivotUp;    
-        const static Vector pivotUpRight;    
-        const static Vector pivotLeft;    
-        const static Vector pivotCenter;    
-        const static Vector pivotRight;    
-        const static Vector pivotDownLeft;    
-        const static Vector pivotDown;    
-        const static Vector pivotDownRight; 
     private: 
         void Render(SDL_Renderer* renderer);
         void ValidateSortingOrder(int& sortingOrder);

@@ -33,6 +33,15 @@ namespace VNGin {
         const static Vector right; 
         const static Vector one;
         const static Vector zero;
+        const static Vector pivotUpLeft;    
+        const static Vector pivotUp;    
+        const static Vector pivotUpRight;    
+        const static Vector pivotLeft;    
+        const static Vector pivotCenter;    
+        const static Vector pivotRight;    
+        const static Vector pivotDownLeft;    
+        const static Vector pivotDown;    
+        const static Vector pivotDownRight; 
         
         /**
          * Returns this vector's magnitude.

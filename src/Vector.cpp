@@ -1,11 +1,20 @@
 #include "Vector.h"
 
-const VNGin::Vector VNGin::Vector::up = VNGin::Vector(0, -1); 
-const VNGin::Vector VNGin::Vector::down = VNGin::Vector(0, 1); 
-const VNGin::Vector VNGin::Vector::left = VNGin::Vector(-1, 0); 
-const VNGin::Vector VNGin::Vector::right = VNGin::Vector(1, 0); 
-const VNGin::Vector VNGin::Vector::one = VNGin::Vector(1, 1); 
-const VNGin::Vector VNGin::Vector::zero = VNGin::Vector(0, 0); 
+const VNGin::Vector VNGin::Vector::up             = {0, -1}; 
+const VNGin::Vector VNGin::Vector::down           = {0, 1}; 
+const VNGin::Vector VNGin::Vector::left           = {-1, 0}; 
+const VNGin::Vector VNGin::Vector::right          = {1, 0}; 
+const VNGin::Vector VNGin::Vector::one            = {1, 1}; 
+const VNGin::Vector VNGin::Vector::zero           = {0, 0}; 
+const VNGin::Vector VNGin::Vector::pivotUpLeft    = {0, 0};
+const VNGin::Vector VNGin::Vector::pivotUp        = {0.5, 0};
+const VNGin::Vector VNGin::Vector::pivotUpRight   = {1, 0};
+const VNGin::Vector VNGin::Vector::pivotLeft      = {0, 0.5};
+const VNGin::Vector VNGin::Vector::pivotCenter    = {0.5, 0.5};
+const VNGin::Vector VNGin::Vector::pivotRight     = {1, 0.5};
+const VNGin::Vector VNGin::Vector::pivotDownLeft  = {0, 1};
+const VNGin::Vector VNGin::Vector::pivotDown      = {0.5, 1};   
+const VNGin::Vector VNGin::Vector::pivotDownRight = {1, 1};
 
 void VNGin::Vector::Normalize() {
     double mag = magnitude(); 

@@ -9,6 +9,14 @@ VNGin::TextureRenderer::TextureRenderer(Entity* owner, SDL_Texture* texture, int
     owner->GetScene()->AddToRenderingMatrix(this);
 }
 
+VNGin::Vector VNGin::TextureRenderer::GetTextureSize() {
+    int w, h;  
+    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+    w *= owner->transform->GetScale().x; 
+    h *= owner->transform->GetScale().y;
+    return Vector(w, h);
+}
+
 void VNGin::TextureRenderer::SetSortingOrder(int sortingOrder) {
     ValidateSortingOrder(sortingOrder);
 
@@ -52,13 +60,3 @@ void VNGin::TextureRenderer::Destroy() {
     owner->RemoveModule<TextureRenderer>();
     SDL_DestroyTexture(texture);
 }
-
-const VNGin::Vector VNGin::TextureRenderer::pivotUpLeft    = {0, 0};
-const VNGin::Vector VNGin::TextureRenderer::pivotUp        = {0.5, 0};
-const VNGin::Vector VNGin::TextureRenderer::pivotUpRight   = {1, 0};
-const VNGin::Vector VNGin::TextureRenderer::pivotLeft      = {0, 0.5};
-const VNGin::Vector VNGin::TextureRenderer::pivotCenter    = {0.5, 0.5};
-const VNGin::Vector VNGin::TextureRenderer::pivotRight     = {1, 0.5};
-const VNGin::Vector VNGin::TextureRenderer::pivotDownLeft  = {0, 1};
-const VNGin::Vector VNGin::TextureRenderer::pivotDown      = {0.5, 1};   
-const VNGin::Vector VNGin::TextureRenderer::pivotDownRight = {1, 1};
