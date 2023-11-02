@@ -3,6 +3,7 @@
 
 #include "Game.h"
 #include "InputSystem.h"
+#include "Jukebox.h"
 #include "Scene.h"
 #include "Entity.h"
 #include "Module.h"
