@@ -27,9 +27,14 @@ void VNGin::Game::New(std::string title, bool fullScreen, int screenWidth, int s
         throw new std::runtime_error(msg); 
     }    
     if(!IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)) {
-        std::string msg = "SDL_image failed to initialize. IMG_Error: "; 
+        std::string msg = "SDL_image failed to initialize. SDL_Error: "; 
         msg += IMG_GetError(); 
         throw new std::runtime_error(msg); 
+    }
+    if(Mix_OpenAudio(48000, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::string msg = "SDL_mixer failed to initialize. SDL_Error: "; 
+        msg += Mix_GetError(); 
+        throw new std::runtime_error(msg);
     }
 
     window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Game::screenWidth, Game::screenHeight, windowFlags);
@@ -75,5 +80,23 @@ void VNGin::Game::Stop() {
 }
 
 SDL_Texture* VNGin::Game::LoadTexture(const char* path) {
-    return IMG_LoadTexture(renderer, path); 
+    SDL_Texture* texture = IMG_LoadTexture(renderer, path); 
+    if(texture == NULL) {
+        std::string msg = "SDL failed to load texture. SDL_Error: ";
+        msg += IMG_GetError();
+        throw new std::runtime_error(msg);
+    }
+
+    return texture;
+}
+
+Mix_Music* VNGin::Game::LoadMusic(const char* path) {
+    Mix_Music* music = Mix_LoadMUS(path); 
+    if(music == NULL) {
+        std::string msg = "SDL failed to load music. SDL_Error: ";
+        msg += Mix_GetError();
+        throw new std::runtime_error(msg);
+    }
+
+    return music;
 }

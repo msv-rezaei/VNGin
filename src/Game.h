@@ -6,6 +6,7 @@
 
 #include <SDL2/SDL.h> 
 #include <SDL2/SDL_image.h> 
+#include <SDL2/SDL_mixer.h>
 
 #include <string> 
 
@@ -25,6 +26,7 @@ namespace VNGin {
         static Scene* GetActiveScene() { return activeScene; }
 
         static SDL_Texture* LoadTexture(const char* path);
+        static Mix_Music* LoadMusic(const char* path); 
     private: 
         static SDL_Window* window;
         static SDL_Renderer* renderer;
