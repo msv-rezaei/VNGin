@@ -1,4 +1,5 @@
 #include "InputSystem.h"
+#include "Game.h"
 
 #include <stdexcept>
 #include <algorithm>
@@ -48,6 +49,7 @@ void VNGin::InputSystem::Update() {
     while(SDL_PollEvent(&event)) {
         switch(event.type) {
         case SDL_QUIT: 
+            Game::Quit();
             exit(0); 
             break;
         case SDL_KEYDOWN: 

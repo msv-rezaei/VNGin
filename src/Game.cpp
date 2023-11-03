@@ -57,6 +57,13 @@ void VNGin::Game::New(std::string title, bool fullScreen, int screenWidth, int s
     activeScene = new Scene();
 }
 
+void VNGin::Game::Quit() {
+    delete activeScene;
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+}
+
 void VNGin::Game::Run(int rate) {
     isRunning = true; 
     while(true) {
