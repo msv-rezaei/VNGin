@@ -21,6 +21,12 @@ bool VNGin::InputSystem::GetKeyUp(SDL_Scancode code) {
     return iter->second.lastState == true && iter->second.currentState == false;
 }
 
+VNGin::Vector VNGin::InputSystem::GetMousePosition() {
+    int mx, my;
+    SDL_GetMouseState(&mx, &my); 
+    return Vector(mx, my);
+}
+
 std::map<SDL_Scancode, VNGin::KeyState>::iterator VNGin::InputSystem::FindOrAddKey(SDL_Scancode code) {
     auto iter = keyMap.find(code);
     if(iter == keyMap.end()) {

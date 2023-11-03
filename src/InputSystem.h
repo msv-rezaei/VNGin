@@ -21,6 +21,7 @@ namespace VNGin {
         static bool GetKey(SDL_Scancode code);
         static bool GetKeyDown(SDL_Scancode code);
         static bool GetKeyUp(SDL_Scancode code);
+        static Vector GetMousePosition(void);
     private: 
         static std::map<SDL_Scancode, KeyState>::iterator FindOrAddKey(SDL_Scancode code);
 
