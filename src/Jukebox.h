@@ -6,7 +6,7 @@
 namespace VNGin {
     class Jukebox {
     public: 
-        static void Set(Mix_Music* music);
+        static void Set(const char* path);
         static void Play(void);
         static void Pause(void);
     private: 

@@ -1,9 +1,10 @@
+#include "Game.h"
 #include "TextureRenderer.h"
 #include "Scene.h"
 #include "Entity.h"
 
-VNGin::TextureRenderer::TextureRenderer(Entity* owner, SDL_Texture* texture, int sortingOrder, Vector pivot)
-    : Module(owner), isVisible{true}, texture{texture}, pivot{pivot}, flip{SDL_FLIP_NONE} {
+VNGin::TextureRenderer::TextureRenderer(Entity* owner, const char* path, int sortingOrder, Vector pivot)
+    : Module(owner), isVisible{true}, texture{Game::LoadTexture(path)}, pivot{pivot}, flip{SDL_FLIP_NONE} {
     ValidateSortingOrder(sortingOrder); 
     this->sortingOrder = sortingOrder;
     owner->GetScene()->AddToRenderingMatrix(this);

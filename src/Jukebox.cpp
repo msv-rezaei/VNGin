@@ -1,9 +1,10 @@
 #include "Jukebox.h"
+#include "Game.h"
 
 Mix_Music* VNGin::Jukebox::music;
 
-void VNGin::Jukebox::Set(Mix_Music* music) {
-    Jukebox::music = music;
+void VNGin::Jukebox::Set(const char* path) {
+    Jukebox::music = Game::LoadMusic(path);
 }
 
 void VNGin::Jukebox::Play() {

@@ -12,7 +12,7 @@ namespace VNGin {
         friend class Scene; 
         friend class Entity;
     public: 
-        TextureRenderer(Entity* owner, SDL_Texture* texture, int sortingOrder = 0, Vector pivot = Vector::pivotCenter);
+        TextureRenderer(Entity* owner, const char* path, int sortingOrder = 0, Vector pivot = Vector::pivotCenter);
         TextureRenderer(const TextureRenderer&) = delete;
         TextureRenderer(TextureRenderer&&) = delete;
 
