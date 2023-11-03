@@ -27,7 +27,6 @@ namespace VNGin {
 
         const char* GetType() { return "Transform"; }
     private: 
-        void Start() {} 
         void Update() {} 
         void Destroy() {} 
 

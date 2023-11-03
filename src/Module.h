@@ -9,7 +9,6 @@ namespace VNGin {
         virtual const char* GetType(void) = 0;
     protected: 
         Module(Entity* owner = nullptr) : owner{owner} {} 
-        virtual void Start(void) = 0;
         virtual void Update(void) = 0;
         virtual void Destroy(void) = 0;
 
