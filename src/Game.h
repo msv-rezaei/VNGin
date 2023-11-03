@@ -27,6 +27,7 @@ namespace VNGin {
 
         static SDL_Texture* LoadTexture(const char* path);
         static Mix_Music* LoadMusic(const char* path); 
+        static Mix_Chunk* LoadSFX(const char* path);
     private: 
         static SDL_Window* window;
         static SDL_Renderer* renderer;

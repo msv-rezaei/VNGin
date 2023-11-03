@@ -100,3 +100,14 @@ Mix_Music* VNGin::Game::LoadMusic(const char* path) {
 
     return music;
 }
+
+Mix_Chunk* VNGin::Game::LoadSFX(const char* path) {
+    Mix_Chunk* clip = Mix_LoadWAV(path); 
+    if(clip == NULL) {
+        std::string msg = "SDL failed to load sound effect. SDL_Error: ";
+        msg += Mix_GetError();
+        throw new std::runtime_error(msg);
+    }
+
+    return clip;
+}
