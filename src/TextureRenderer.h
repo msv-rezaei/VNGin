@@ -30,7 +30,6 @@ namespace VNGin {
         void Render(SDL_Renderer* renderer);
         void ValidateSortingOrder(int& sortingOrder);
 
-        void Update() {} 
         void Destroy(void);
 
         bool isVisible;

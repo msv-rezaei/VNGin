@@ -27,9 +27,6 @@ namespace VNGin {
 
         const char* GetType() { return "Transform"; }
     private: 
-        void Update() {} 
-        void Destroy() {} 
-
         Vector position;
         double rotation;
         Vector scale;
