@@ -12,6 +12,7 @@
 
 namespace VNGin {
     class Game {
+        friend class BoxCollider;
     public: 
         static void New(std::string title = "New Game", bool fullScreen = true, int screenWidth = 1920, int screenHeight = 1080, 
             ColorRGBA backgroundColor = ColorRGBA::white); 

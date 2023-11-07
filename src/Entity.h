@@ -7,7 +7,6 @@
 #include <vector> 
 #include <string> 
 #include <algorithm>
-#include <SDL2/SDL.h>
 
 namespace VNGin {
     class Scene;

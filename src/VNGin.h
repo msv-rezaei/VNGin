@@ -10,6 +10,7 @@
 #include "Module.h"
 #include "Transform.h"
 #include "TextureRenderer.h"
+#include "BoxCollider.h"
 #include "Utility.h"
 #include "Vector.h"
 
