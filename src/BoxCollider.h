@@ -10,7 +10,13 @@ namespace VNGin {
     class BoxCollider : public Module {
     public: 
         BoxCollider(Entity* owner, int width, int height, Vector pivot = Vector::pivotCenter);
-        const char* GetType() { return "BoxCollider"; }
+
+        inline Vector GetPosition() { return Vector(rect.x, rect.y); } 
+        inline int GetWidth() { return rect.w; }
+        inline int GetHeight() { return rect.h; }
+        inline Vector GetPivot() { return pivot; }
+
+        inline const char* GetType() { return "BoxCollider"; }
     private: 
         void Update(void);
 

@@ -1,4 +1,5 @@
 #include "InputSystem.h"
+#include "BoxCollider.h"
 #include "Game.h"
 
 #include <stdexcept>
@@ -48,6 +49,19 @@ VNGin::Vector VNGin::InputSystem::GetMousePosition() {
     int mx, my;
     SDL_GetMouseState(&mx, &my); 
     return Vector(mx, my);
+}
+
+bool VNGin::InputSystem::IsMouseOver(BoxCollider* target) {
+    auto mousePos = InputSystem::GetMousePosition();
+    auto targetPivot = target->GetPivot(); 
+    auto targetWidth = target->GetWidth(); 
+    auto targetHeight = target->GetHeight();
+    Vector position = 
+        {target->GetPosition().x  + (targetPivot.x * targetWidth), 
+        target->GetPosition().y  + (targetPivot.y * targetHeight)};
+    Vector xBound = {position.x - targetWidth/2, position.x + targetWidth/2};
+    Vector yBound = {position.y - targetHeight/2, position.y + targetHeight/2};
+    return mousePos.x > xBound.x && mousePos.x < xBound.y && mousePos.y > yBound.x && mousePos.y < yBound.y;
 }
 
 std::map<SDL_Scancode, VNGin::KeyState>::iterator VNGin::InputSystem::FindOrAddKey(SDL_Scancode code) {

@@ -10,6 +10,7 @@
 
 namespace VNGin {
     class Game;
+    class BoxCollider;
 
     struct KeyState {
     public: 
@@ -27,6 +28,7 @@ namespace VNGin {
         static bool GetKeyUp(SDL_Scancode code);
         static bool GetMouseButtonUp(int index);
         static Vector GetMousePosition(void);
+        static bool IsMouseOver(BoxCollider* target);
     private: 
         static std::map<SDL_Scancode, KeyState>::iterator FindOrAddKey(SDL_Scancode code);
 
