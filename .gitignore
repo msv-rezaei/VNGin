@@ -1,6 +1,9 @@
 # VSCode
 /.vscode
 
+# Make
+/Makefile
+
 # Prerequisites
 *.d
 
